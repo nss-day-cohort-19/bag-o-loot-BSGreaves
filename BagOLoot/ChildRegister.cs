@@ -7,7 +7,6 @@ namespace BagOLoot
 {
     public class ChildRegister
     {
-        private List<string> _children = new List<string>();
         private string _connectionString = $"Data Source={Environment.GetEnvironmentVariable("BAGOLOOT_DB")}";
         private SqliteConnection _connection;
 
@@ -48,18 +47,17 @@ namespace BagOLoot
             return _lastId != 0;
         }
 
-        public List<string> GetChildren ()
+        public List<string> GetChildList ()
         {
-            return new List<string>();
+            //should search the DB and return all children in the Child table
+            //Might just save it in a local var
+            return new List<string>(){"test"};
         }
 
-        public string GetChild (string name)
+        public int GetChild (string name)
         {
-            var child = _children.SingleOrDefault(c => c == name);
-
-            // Inevitably, two children will have the same name. Then what?
-
-            return child;
+            //Should take a name, search the DB for the string, and return the correct ID
+            return 4;
         }
     }
 }

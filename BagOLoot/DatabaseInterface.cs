@@ -55,3 +55,11 @@ namespace BagOLoot
         }
     }
 }
+
+// using (SqliteDataReader dr = dbcmd.ExecuteReader)
+// {
+//     while (dr.Read())
+//     {
+//         _children.Add(dr[1].ToString());
+//     }
+// }

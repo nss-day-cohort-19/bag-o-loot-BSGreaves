@@ -6,28 +6,38 @@ namespace BagOLoot.Tests
 {
     public class ChildRegisterShould
     {
-        private readonly ChildRegister _register;
+        private readonly ChildRegister _childRegister;
 
         public ChildRegisterShould()
         {
-            _register = new ChildRegister();
+            _childRegister = new ChildRegister();
         }
 
         [Theory]
         [InlineData("Sarah")]
         [InlineData("Jamal")]
         [InlineData("Kelly")]
-        public void AddChildren(string child)
+        public void AddChild(string childName)
         {
-            var result = _register.AddChild(child);
+            var result = _childRegister.AddChild(childName);
             Assert.True(result);
         }
 
         [Fact]
-        public void ReturnListOfChildren()
+        public void GetChildList()
         {
-            var result = _register.GetChildren();
+            var result = _childRegister.GetChildList();
             Assert.IsType<List<string>>(result);
+        }
+
+        [Theory]
+        [InlineData("Sarah")]
+        [InlineData("Jamal")]
+        [InlineData("Kelly")]
+        public void GetChild(string childName)
+        {
+            var result = _childRegister.GetChild(childName);
+            Assert.IsType<int>(result);
         }
     }
 }
