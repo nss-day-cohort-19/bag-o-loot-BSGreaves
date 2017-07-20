@@ -9,25 +9,28 @@ namespace BagOLoot
         public static void Main(string[] args)
         {
             var db = new DatabaseInterface();
-            db.Check();
-
-            Console.WriteLine ("WELCOME TO THE BAG O' LOOT SYSTEM");
-            Console.WriteLine ("*********************************");
-            Console.WriteLine ("1. Add a child");
-			Console.Write ("> ");
-
+            var MainMenu = new MenuInterface();
+            //db.CheckDB();
+            db.DropAndSeedDB();
+			int choice = MainMenu.DisplayMainMenu();
 			// Read in the user's choice
-			int choice;
-			Int32.TryParse (Console.ReadLine(), out choice);
+            //Alt:
+            //ConsoleKeyInfo enteredKey = Console.ReadKey();
+            //choice = int.Parse(enteredKey.KeyChar.ToString());
 
-            if (choice == 1)
+            switch (choice)
             {
-                Console.WriteLine ("Enter child name");
-                Console.Write ("> ");
-                string childName = Console.ReadLine();
-                ChildRegister registry = new ChildRegister();
-                bool childId = registry.AddChild(childName);
-                Console.WriteLine(childId);
+                case 1:
+                    Console.WriteLine ("What's the Child's name?");
+                    Console.Write ("> ");
+                    string childName = Console.ReadLine();
+                    ChildRegister registry = new ChildRegister();
+                    bool childId = registry.AddChild(childName);
+                    Console.WriteLine(childId);
+                    break;
+                case 2:
+
+                    break;
             }
         }
     }
