@@ -27,7 +27,7 @@ namespace BagOLoot.Tests
         public void GetChildList()
         {
             var result = _childRegister.GetChildList();
-            Assert.IsType<List<string>>(result);
+            Assert.IsType<List<(string, int)>>(result);
         }
 
         [Theory]

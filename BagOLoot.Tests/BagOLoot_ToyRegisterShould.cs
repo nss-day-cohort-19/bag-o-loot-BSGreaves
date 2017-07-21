@@ -14,11 +14,11 @@ namespace BagOLoot.Tests
         }
 
         [Theory]
-        [InlineData(1, 2)]
-        [InlineData(3, 4)]
-        public void AddToy (int childid, int toyid)
+        [InlineData(1, "Bat")]
+        [InlineData(3, "Ball")]
+        public void AddToy (int childid, string toy)
         {
-           var result = _toyRegister.AddToy(childid, toyid);
+           var result = _toyRegister.AddToy(childid, toy);
            Assert.True(result);
         }
 

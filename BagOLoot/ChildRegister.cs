@@ -22,13 +22,8 @@ namespace BagOLoot
             {
                 _connection.Open ();
                 SqliteCommand dbcmd = _connection.CreateCommand ();
-
-                // Insert the new child
                 dbcmd.CommandText = $"insert into child values (null, '{child}', 0)";
-                Console.WriteLine(dbcmd.CommandText);
                 dbcmd.ExecuteNonQuery ();
-
-                // Get the id of the new row
                 dbcmd.CommandText = $"select last_insert_rowid()";
                 using (SqliteDataReader dr = dbcmd.ExecuteReader()) 
                 {
@@ -38,24 +33,35 @@ namespace BagOLoot
                         throw new Exception("Unable to insert value");
                     }
                 }
-
-                // clean up
                 dbcmd.Dispose ();
                 _connection.Close ();
             }
-
             return _lastId != 0;
         }
 
-        public List<string> GetChildList ()
+        public List <(string, int)> GetChildList ()
         {
-            //should search the DB and return all children in the Child table
-            //Might just save it in a local var
-            return new List<string>(){"test"};
+            List <(string, int)> childList = new List <(string, int)>();
+            using (_connection)
+            {
+                _connection.Open();
+                SqliteCommand dbcmd = _connection.CreateCommand();
+                dbcmd.CommandText = $"select c.name, c.childID from child c";
+                using (SqliteDataReader dr = dbcmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        childList.Add((dr[0].ToString(), dr.GetInt32(1)));
+                    }
+                }
+                _connection.Open();
+            }
+            return childList;
         }
 
         public int GetChild (string name)
         {
+            
             //Should take a name, search the DB for the string, and return the correct ID
             return 4;
         }

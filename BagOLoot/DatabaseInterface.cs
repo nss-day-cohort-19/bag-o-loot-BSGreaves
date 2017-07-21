@@ -84,12 +84,17 @@ namespace BagOLoot
                     "Sue",
                     "Sarah"
                 };
-                List <string> ToySeed = new List <string>()
+                List <(string, int)> ToySeed = new List <(string, int)>()
                 {
-                    "Xbox",
-                    "Trampoline",
-                    "Motorcycle",
-                    "Ball-in-a-cup"
+                    ("Xbox", 1),
+                    ("Trampoline", 1),
+                    ("Motorcycle", 2),
+                    ("Ball-in-a-cup", 1),
+                    ("Brown Stick", 4),
+                    ("Cup of Soup", 4),
+                    ("Diamonds", 2),
+                    ("Vinegar", 3),
+
                 };
                 _connection.Open();
                 executeSQLNonQuery("DROP TABLE IF EXISTS child");
@@ -108,9 +113,9 @@ namespace BagOLoot
                     string SQLString = $"INSERT INTO child VALUES (null, '{child}', 0)";
                     executeSQLNonQuery(SQLString);
                 }
-                foreach (string toy in ToySeed)
+                foreach ((string, int) toy in ToySeed)
                 {
-                    executeSQLNonQuery($"INSERT INTO toy VALUES (null, '{toy}', null)");
+                    executeSQLNonQuery($"INSERT INTO toy VALUES (null, '{toy.Item1}', {toy.Item2} )");
                 }
                 _connection.Close ();
             }
